@@ -4,23 +4,27 @@
 {% endblock %}
 {% block content %}
 	<table>
-		<caption>UPDATE </caption>
+		<caption>Actualizando</caption>
 		<thead>
 			<tr>
 				<th>Usuario</th>
 				<th>Actualizar</th>
 			</tr>
-			
-				<form method="post">
-				{{lista}}
-				{% for elemento in lista  %}
-					<tr>
-						<td><input name="usuario" type="text" value="{{ elemento.id }}" size="17"> </td>
-						<td><input name"boton-nuevo" type="submit" value="UPDATE"></td>
-					</tr>
-				{% endfor %}
-				</form>
-			
 		</thead>
+
+			
+				{% for elemento in lista  %}
+					{% if elemento.id == id   %}
+						<form method="post">
+							<tr>
+								<td><input name="usuario" type="text" value="{{ elemento.usuario }}" size="17"> </td>
+								<td><input name"boton-nuevo" type="submit" value="UPDATE"></td>
+							</tr>
+						</form>
+					{% endif %}
+				{% endfor %}
+
+			
+
 	</table>
 {% endblock %}

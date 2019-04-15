@@ -44,19 +44,19 @@ def delete():
 @app.route("/update", methods = ["GET","POST"])
 def update():
     elemento_id = request.args.get('id')
+    #lista = Usuarios.query.order_by(Usuarios.id).all()
     lista = Usuarios.query.order_by(Usuarios.id).all()
    
     if request.method == "POST":
-        if (request.fomr["usuario"] != ""):
-            actualizacion = Usuario(usuario = request.form["usuario"])
-            usuario_actualizar = Usuario.query.filter_by(id = elemento_id).first()
-            usuario_actualizar.usuario = actualizacion
+        if (request.form["usuario"] != ""):
+            usuario_actualizar = Usuarios.query.filter_by(id = int(elemento_id)).first()
+            usuario_actualizar.usuario = request.form["usuario"]
             db.session.commit()
-            lista=Usuario.query.order_by(Usuario.id).all()
-            return render_template("index.html",lista=lista) 
+            lista=Usuarios.query.order_by(Usuarios.id).all()
+            return redirect(url_for("index")) 
 
     
-    return render_template("update.html",lista = lista, id = elemento_id)
+    return render_template("update.html",lista = lista,id = int(elemento_id))
 
 if __name__ == ("__main__"):
     db.create_all()
