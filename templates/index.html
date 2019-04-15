@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+	CRUD
+{% endblock %}
+
+{% block content %}
+<table >
+<caption>CRUD</caption>
+<thead>
+	<tr>
+		<th>BORRAR</th>
+		<th>USUARIO</th>
+		<th>ACTUALIZAR</th>
+	</tr>
+</thead>
+
+	{% for elementos in lista %}
+	<tr>
+		
+		<td><a href="/delete?id={{ elementos.id }}" class = "button">BORRAR</a></td>
+		<td><input name="{{ elementos.id }} " type="text" value="{{ elementos.usuario }} " size="15"></td>
+		<td><a href="/update?id={{ elementos.id }}" class = "button">ACTUALIZAR</a></td>
+		
+	</tr>
+	{% endfor %}
+	
+	
+</table>
+<table>
+	<thead>
+	<tr>
+		<form method="post">
+			<td></td>
+			<td><input name="usuario" type="text" placeholder="Nuevo" size="15"></td>
+			<td><input name="boton-nuevo" type="submit" value="NUEVO"></td>
+		</form>
+	</tr>
+	</thead>	
+</table>
+{% endblock %}
+

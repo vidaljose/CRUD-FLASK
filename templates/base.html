@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="shortcut icon" href="{{ url_for('static',filename='imgs/icono.ico') }}">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+				<div class="col-sm-2"></div>
+					<div class = "col-sm-8">
+        				{% block content %}
+        				{% endblock %}
+					</div>
+            </div>
+        </div>
+    </body>
+</html>
+

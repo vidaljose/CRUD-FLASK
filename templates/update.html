@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+	UPDATE {{id}}
+{% endblock %}
+{% block content %}
+	<table>
+		<caption>UPDATE </caption>
+		<thead>
+			<tr>
+				<th>Usuario</th>
+				<th>Actualizar</th>
+			</tr>
+			
+				<form method="post">
+				{{lista}}
+				{% for elemento in lista  %}
+					<tr>
+						<td><input name="usuario" type="text" value="{{ elemento.id }}" size="17"> </td>
+						<td><input name"boton-nuevo" type="submit" value="UPDATE"></td>
+					</tr>
+				{% endfor %}
+				</form>
+			
+		</thead>
+	</table>
+{% endblock %}
