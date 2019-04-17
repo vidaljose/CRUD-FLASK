@@ -4,7 +4,8 @@
         <meta charset = "utf-8">
         <title>{% block title %}{% endblock %}</title>
         <link rel="shortcut icon" href="{{ url_for('static',filename='imgs/icono.ico') }}">
-        <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+				<link rel="stylesheet" href="{{url_for("static",filename="mini-default.min.css")}}">
+				
     </head>
     <body>
         <div class="container">

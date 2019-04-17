@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request, redirect,url_for
+from flask import Flask, render_template,request, redirect,url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
 import os
@@ -10,10 +10,15 @@ app.config["SQLALCHEMY_DATABASE_URI"]=dbdir
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
 db=SQLAlchemy(app)
 
+
+app.secret_key="123"
+
 #creando la base de datos
 class Usuarios(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     usuario = db.Column(db.String(20),unique=True,nullable=False)
+
+    
 
 
 
@@ -28,6 +33,7 @@ def index():
             db.session.add(nuevo_usuario)
             db.session.commit()
             lista=Usuarios.query.order_by(Usuarios.id).all()
+            flash(f"Agregaste exitosamente el usuario: {request.form['usuario']}")
             return render_template("index.html",lista = lista)
 
     return render_template("index.html",lista = lista)
@@ -36,9 +42,11 @@ def index():
 @app.route("/delete")
 def delete():
     id = request.args.get('id')
+    #id_elemento_usuario = usuarios.select(usuarios.usuario.id==id).execute().first() 
     actualizar_usuario = Usuarios.query.filter_by(id=id).first()
     db.session.delete(actualizar_usuario)
     db.session.commit()
+    flash(f"Se elimino el elemento")
     return redirect(url_for("index"))
 
 @app.route("/update", methods = ["GET","POST"])
@@ -53,6 +61,7 @@ def update():
             usuario_actualizar.usuario = request.form["usuario"]
             db.session.commit()
             lista=Usuarios.query.order_by(Usuarios.id).all()
+            flash(f"Se actualizo el elemento")
             return redirect(url_for("index")) 
 
     
